@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -113,7 +113,11 @@ namespace Network_Disable
 			Console.Write("Desativando, aguarde...\n");
 			try
 			{
-				PowerShell.Create().AddCommand("Disable-NetAdapter").AddParameter("Name", "*").AddParameter("Confirm", new SwitchParameter(false)).Invoke();
+				PowerShell.Create()
+				.AddCommand("Disable-NetAdapter")
+				.AddParameter("Name", "*")
+				.AddParameter("Confirm", new SwitchParameter(false))
+				.Invoke();
 
 				Console.Write("Dispositivos desativados\n");
 
@@ -131,7 +135,10 @@ namespace Network_Disable
 
 			try
 			{
-				PowerShell.Create().AddCommand("Enable-NetAdapter").AddParameter("Name", "*").Invoke();
+				PowerShell.Create()
+				.AddCommand("Enable-NetAdapter")
+				.AddParameter("Name", "*")
+				.Invoke();
 
 				Console.Write("Dispositivos ativados\nSua internet voltará em breve");
 				

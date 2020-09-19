@@ -13,7 +13,7 @@ namespace Network_Disable
 {
 	class Program
 	{
-
+	
 		[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
 		private static extern IntPtr SetWindowsHookEx(int idHook, LowLevelKeyboardProc lpfn, IntPtr hMod, uint dwThreadId);
 
@@ -108,16 +108,21 @@ namespace Network_Disable
 
 		}
 
+/* A versão MK2 usa a configuração de IP do Windows ao invés de literalmente desativar os dispositivos */
+
 		static void Desabilitar()
 		{
 			Console.Write("Desativando, aguarde...\n");
 			try
 			{
-				PowerShell.Create()
-				.AddCommand("Disable-NetAdapter")
-				.AddParameter("Name", "*")
-				.AddParameter("Confirm", new SwitchParameter(false))
-				.Invoke();
+				/*	PowerShell.Create()
+					.AddCommand("Disable-NetAdapter")
+					.AddParameter("Name", "*")
+					.AddParameter("Confirm", new SwitchParameter(false))
+					.Invoke();*/
+
+				// MK2
+				System.Diagnostics.Process.Start("CMD.exe", "/C ipconfig /release");
 
 				Console.Write("Dispositivos desativados\n");
 
@@ -135,10 +140,13 @@ namespace Network_Disable
 
 			try
 			{
-				PowerShell.Create()
+				/*PowerShell.Create()
 				.AddCommand("Enable-NetAdapter")
 				.AddParameter("Name", "*")
-				.Invoke();
+				.Invoke();*/
+
+				//MK2
+				System.Diagnostics.Process.Start("CMD.exe", "/C ipconfig /renew");
 
 				Console.Write("Dispositivos ativados\nSua internet voltará em breve");
 				

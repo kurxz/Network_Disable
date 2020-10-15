@@ -35,7 +35,7 @@ namespace Network_Disable
 
 		static void Main(string[] args)
 		{
-			Console.Title = "Network Disable";
+			Console.Title = "Network Disable MK3";
 
 			Console.WriteLine("Este aplicativo irá desativar/reativar todos os seus dispositivos de rede");
 			Console.WriteLine("Pressione a tecla F3 para Desativar. E F4 para Reativar");
@@ -122,7 +122,11 @@ namespace Network_Disable
 					.Invoke();*/
 
 				// MK2
-				System.Diagnostics.Process.Start("CMD.exe", "/C ipconfig /release");
+				//System.Diagnostics.Process.Start("CMD.exe", "/C ipconfig /release"); 
+				 
+				
+				// MK3
+				System.Diagnostics.Process.Start("CMD.exe", "/C wmic path win32_networkadapter where NetEnabled=TRUE call disable");
 
 				Console.Write("Dispositivos desativados\n");
 
@@ -144,9 +148,13 @@ namespace Network_Disable
 				.AddCommand("Enable-NetAdapter")
 				.AddParameter("Name", "*")
 				.Invoke();*/
-
-				//MK2
-				System.Diagnostics.Process.Start("CMD.exe", "/C ipconfig /renew");
+				 
+				// MK2
+				// System.Diagnostics.Process.Start("CMD.exe", "/C ipconfig /renew"); 
+				 
+		
+				//MK3
+				System.Diagnostics.Process.Start("CMD.exe", "/C wmic path win32_networkadapter where NetEnabled=FALSE call enable");
 
 				Console.Write("Dispositivos ativados\nSua internet voltará em breve");
 				

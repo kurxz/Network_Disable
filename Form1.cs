@@ -32,8 +32,6 @@ namespace Network_Disable {
     private static LowLevelKeyboardProc _proc = HookCallback;
     private static IntPtr _hookID = IntPtr.Zero;
 
-    public static String teclaF = "";
-
     public Form1() {
       InitializeComponent();
       _hookID = SetHook(_proc);
@@ -99,8 +97,7 @@ namespace Network_Disable {
     int nCode, IntPtr wParam, IntPtr lParam) {
       if (nCode >= 0 && wParam == (IntPtr) WM_KEYDOWN) {
         int vkCode = Marshal.ReadInt32(lParam);
-
-        Debug.WriteLine(vkCode);
+    
         processarInfo(vkCode);
 
       }
@@ -149,7 +146,7 @@ namespace Network_Disable {
 
       } catch(Exception) {
 
-        MessageBox.Show("Não foi possivel desativar o adaptador");
+        MessageBox.Show("Não foi possível desativar o adaptador");
       }
     }
 
@@ -161,7 +158,7 @@ namespace Network_Disable {
 
       } catch(Exception) {
 
-        MessageBox.Show("Não foi possivel ativar o adaptador");
+        MessageBox.Show("Não foi possível ativar o adaptador");
       }
     }
 
